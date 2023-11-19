@@ -1,11 +1,11 @@
 import { AddToCart } from "./add-to-cart";
 import Price from "../../../components/price";
-import Prose from "../../../components/prose";
 import { VariantSelector } from "./variant-selector";
 
 export function ProductSpecifications({ lang, product, selectedOptions }) {
   const options = Object.keys(selectedOptions).map((k) => selectedOptions[k]);
   const v = product.variants.find((v) => v.options.every((o) => options.includes(o.value)));
+  const serviceInfo = product.meta?.serviceInfo || {};
 
   return (
     <>
@@ -34,13 +34,24 @@ export function ProductSpecifications({ lang, product, selectedOptions }) {
       <AddToCart lang={lang} product={product} />
 
       {product.meta?.serviceInfo && (
-        <div>
-          <h3 className="font-semibold mt-4 mb-2">{content.specificationTitle[lang]}</h3>
-          <Prose
-            className="mb-6 text-sm leading-tight dark:text-white/[60%]"
-            html={product.meta?.serviceInfo}
-          />
-          {/* Todo: use table to generate this data "product.meta?.serviceInfo" */}
+        <div className="mt-10">
+          <h3 className="font-semibold mb-2">{content.specificationTitle[lang]}</h3>
+
+          <table
+            dir="auto"
+            className="text-sm leading-tight table-auto border-collapse border border-slate-400"
+          >
+            <tbody>
+              {Object.keys(serviceInfo).map((k, i) => (
+                <tr key={i}>
+                  <th scope="row" className="border border-slate-300 p-2 text-left">
+                    {k}
+                  </th>
+                  <td className="border border-slate-300 p-2">{serviceInfo[k]}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
     </>

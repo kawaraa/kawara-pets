@@ -55,10 +55,7 @@ export default async function ProductPage({ params: { lang, slug }, searchParams
           {product.description && (
             <div className="mt-20">
               <h2 className="text-xl font-semibold mb-4">{desc[lang]}</h2>
-              <Prose
-                className="mb-6 text-sm leading-tight dark:text-white/[60%]"
-                html={product.description}
-              />
+              <Prose className="overflow-hidden whitespace-pre-line" html={product.description} />
             </div>
           )}
         </div>
