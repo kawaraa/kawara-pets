@@ -52,7 +52,8 @@ export default function CartModal({ lang }) {
         enter="opacity-100 backdrop-blur-[.5px]"
         exit="opacity-0 backdrop-blur-none"
         time="200"
-        aria-hidden="true"></Transition>
+        aria-hidden="true"
+      ></Transition>
 
       {/* Todo: prevent window scrolling when the child is fixed */}
       <Transition
@@ -64,7 +65,8 @@ export default function CartModal({ lang }) {
         exit="translate-x-full"
         time="200"
         role="dialog"
-        aria-hidden="false">
+        aria-hidden="false"
+      >
         <div className="flex items-center justify-between">
           <p className="text-lg font-semibold">{content.cart[lang]}</p>
 
@@ -77,7 +79,7 @@ export default function CartModal({ lang }) {
         {cart.length === 0 ? (
           <div className="mt-20 flex w-full flex-col items-center justify-center overflow-hidden">
             <ShoppingCartIcon className="h-16" />
-            <p className="mt-6 text-center text-2xl font-bold">Your cart is empty.</p>
+            <p className="mt-6 text-center text-2xl">{content.empty[lang]}</p>
           </div>
         ) : (
           <div className="flex h-full flex-col justify-between overflow-hidden p-1">
@@ -95,7 +97,8 @@ export default function CartModal({ lang }) {
                 return (
                   <li
                     key={i}
-                    className="flex w-full flex-col border-b border-neutral-300 dark:border-neutral-700">
+                    className="flex w-full flex-col border-b border-neutral-300 dark:border-neutral-700"
+                  >
                     <div className="relative flex w-full flex-row justify-between px-1 py-4">
                       <div className="absolute z-[1] -mt-2 ml-[55px]">
                         <DeleteItemButton variantId={item.variantId} />
@@ -163,7 +166,8 @@ export default function CartModal({ lang }) {
             <a
               href="#"
               onClick={redirectToStripe}
-              className="block w-full rounded-full bg-blue-600 p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100">
+              className="block w-full rounded-full bg-blue-600 p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
+            >
               {content.checkout[lang]}
             </a>
           </div>
@@ -175,6 +179,7 @@ export default function CartModal({ lang }) {
 
 const content = {
   cart: { en: "Shopping Cart", ar: "سلة التسوق" },
+  empty: { en: "Your cart is empty.", ar: "عربة التسوق فارغة." },
   tax: { en: "Taxes", ar: "الضريبة" },
   shipping: { en: "Shipping", ar: "الشحن" },
   shippingCost: { en: "Free", ar: "مجانا" },
