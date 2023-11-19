@@ -43,7 +43,7 @@ export default function getMetadata({ lang, title, description, keywords, author
       images: [`${baseUrl}/android-chrome-512x512.png`],
       site: twitterSite,
     },
-    appleWebApp: { title: "Kawara Shop", statusBarStyle: "black-translucent" },
+    appleWebApp: { title: "Kawara Pets", statusBarStyle: "black-translucent" },
     robots: {
       follow: true,
       index: true,
@@ -52,14 +52,14 @@ export default function getMetadata({ lang, title, description, keywords, author
 }
 
 const content = {
-  title: { en: "Kawara Shop - Web Shop", ar: "متجر ويب - Kawara Shop" },
+  title: { en: "Kawara Pets - Web Shop", ar: "متجر ويب - Kawara Pets" },
   description: {
-    en: "Kawara Shop is an web shop online store that serve a heigh quality products from different categories, order now and benefit the fast shipping.",
-    ar: "Kawara Shop هو متجر إلكتروني يقدم منتجات عالية الجودة من فئات مختلفة، اطلب الآن واستفد من الشحن السريع",
+    en: "Kawara Pets is an web shop online store that serve a heigh quality products from different categories, order now and benefit the fast shipping.",
+    ar: "Kawara Pets هو متجر إلكتروني يقدم منتجات عالية الجودة من فئات مختلفة، اطلب الآن واستفد من الشحن السريع",
   },
   keywords: {
-    en: "Kawara Shop, web shop, online store, Marketplace, heigh quality products, product categories",
-    ar: "Kawara Shop، متجر ويب، متجر على الإنترنت، سوق، منتجات عالية الجودة، فئات المنتجات",
+    en: "Kawara Pets, web shop, online store, Marketplace, heigh quality products, product categories",
+    ar: "Kawara Pets متجر ويب، متجر على الإنترنت، سوق، منتجات عالية الجودة، فئات المنتجات",
   },
-  author: { name: "Kawara Shop", url: baseUrl },
+  author: { name: "Kawara Pets", url: baseUrl },
 };

@@ -1,11 +1,11 @@
 {
-  "name": "Dev Tody",
-  "short_name": "Kawara Shop",
+  "name": "kawara Pets",
+  "short_name": "Kawara Pets",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
-  "description": "Kawara Shop is an web shop online store that serve a heigh quality products from different categories, order now and benefit the fast shipping.",
+  "description": "Kawara Pets is an web shop online store that serve a heigh quality pet products from different collections, order now and benefit the fast shipping.",
   "orientation": "portrait-primary",
   "icons": [
     {
@@ -34,7 +34,7 @@
       "sizes": "192x192"
     },
     {
-      "src": "/kawara-shop-logo.png",
+      "src": "/kawara-pets-logo.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "maskable"

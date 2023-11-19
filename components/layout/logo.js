@@ -11,7 +11,7 @@ export default function Logo({ size }) {
       <LogoSquare size={size} />
       <div className="ml-2 text-lg text-neutral-500 dark:text-neutral-400 font-bold uppercase whitespace-pre font-[sans-serif]">
         <span className="mr-1 ">{siteName[0]}</span>
-        <span className="text-red-400">{siteName[1]}</span>
+        <span className="text-yellow-500">{siteName[1]}</span>
       </div>
     </Link>
   );
@@ -40,9 +40,7 @@ export function LogoSquare({ size }) {
 
 // style = "width: 512px; height: 512px; background: #262626";
 export function LogoIcon() {
-  return (
-    <Image src="/kawara-shop-logo-transparent.png" priority width="100" height="100" alt="Kawara Shop Logo" />
-  );
+  return <Image src="/kawara-pets-logo.png" priority width="100" height="100" alt="Kawara Pets Logo" />;
 
   // return (
   //   <svg

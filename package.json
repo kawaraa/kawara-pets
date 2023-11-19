@@ -1,8 +1,8 @@
 {
-  "name": "kawara-shop",
+  "name": "kawara-pets",
   "version": "0.1.0",
   "private": true,
-  "description": "Kawara Shop frontend application",
+  "description": "Kawara Pets frontend application",
   "author": {
     "name": "Kawara Software development"
   },

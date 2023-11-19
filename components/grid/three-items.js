@@ -16,12 +16,15 @@ export async function ThreeItemGrid({ lang }) {
 }
 
 function ThreeItemGridItem({ lang, item, size, priority }) {
+  if (!item?.variants) return null;
+
   const variants = item.variants.sort((a, b) => a.price - b.price);
   return (
     <div className={size === "full" ? "md:col-span-4 md:row-span-2" : "md:col-span-2 md:row-span-1"}>
       <Link
         className="relative block aspect-square h-full w-full"
-        href={`/${lang}/product/${item.name.replaceAll(" ", "-")}`}>
+        href={`/${lang}/product/${item.name.replaceAll(" ", "-")}`}
+      >
         <GridTileImage
           src={item.meta.images[0]}
           fill

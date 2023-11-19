@@ -1,6 +1,6 @@
 {
   "apiHost": null,
-  "storeId": 10101010,
+  "storeId": 20202020,
   "product": "/api/products",
   "contact": "/api/contacts"
 }
