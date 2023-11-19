@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+@supports (font: -apple-system-body) and (-webkit-appearance: none) {
+  img[loading="lazy"] {
+    clip-path: inset(0.6px);
+  }
+}
+
+a,
+input,
+button {
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-50 dark:focus-visible:ring-neutral-600 dark:focus-visible:ring-offset-neutral-900;
+}
+
+.rq::before {
+  display: inline-block;
+  margin-inline-end: 4px;
+  color: #ff4d4f;
+  font-size: 14px;
+  font-family: sans-serif;
+  line-height: 1;
+  content: "*";
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-srl-bar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-srl-bar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Card hover and focus */
+.cd_fs:focus {
+  /* outline: #9aa0a6 solid 1px; */
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+.dark .cd_fs:focus {
+  box-shadow:
+    0 10px 15px -3px #ffffff1a,
+    0 4px 6px -4px #ffffff1a;
+}
+.cd_hr:hover {
+  /* border-color: #9aa0a6; */
+  transform: scale(1.01);
+  box-shadow: 3px 3px 20px 5px rgb(0 0 0 / 0.1);
+}
+.dark .cd_hr:hover {
+  box-shadow: 3px 3px 20px 5px #ffffff1a;
+}

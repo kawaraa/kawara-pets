@@ -1,0 +1,67 @@
+import Link from "next/link";
+import clsx from "clsx";
+import Image from "next/image";
+const { SITE_NAME } = process.env;
+
+export default function Logo({ size }) {
+  const siteName = SITE_NAME.split(" ");
+
+  return (
+    <Link href="/" className="mr-6 flex w-full items-center justify-center md:w-auto">
+      <LogoSquare size={size} />
+      <div className="ml-2 text-lg text-neutral-500 dark:text-neutral-400 font-bold uppercase whitespace-pre font-[sans-serif]">
+        <span className="mr-1 ">{siteName[0]}</span>
+        <span className="text-red-400">{siteName[1]}</span>
+      </div>
+    </Link>
+  );
+}
+
+export function LogoSquare({ size }) {
+  return (
+    <div
+      className={clsx(
+        "flex flex-none items-center justify-center border border-neutral-200 bg-white dark:border-neutral-700 dark:bg-black overflow-hidden",
+        {
+          "h-[40px] w-[40px] rounded-xl": !size,
+          "h-[30px] w-[30px] rounded-lg": size === "sm",
+        }
+      )}
+    >
+      <LogoIcon
+        className={clsx({
+          "h-[16px] w-[16px]": !size,
+          "h-[10px] w-[10px]": size === "sm",
+        })}
+      />
+    </div>
+  );
+}
+
+// style = "width: 512px; height: 512px; background: #262626";
+export function LogoIcon() {
+  return (
+    <Image src="/kawara-shop-logo-transparent.png" priority width="100" height="100" alt="Kawara Shop Logo" />
+  );
+
+  // return (
+  //   <svg
+  //     xmlns="http://www.w3.org/2000/svg"
+  //     aria-label={`${process.env.SITE_NAME} logo`}
+  //     viewBox="0 0 512 512"
+  //     {...props}
+  //     className={clsx("h-4 w-4 fill-black dark:fill-white", props.className)}>
+  //     <title>{process.env.SITE_NAME} logo</title>
+  //     <g class="layer">
+  //       <g id="svg_1" fill="#00eeff">
+  //         {/* or #2563eb */}
+  //         <path d="m223.55,313.95l-103,31.1c-7.29,2.21 -7.87,11.38 -0.91,14.32l41.3,17.47c1.81,0.77 3.27,2.09 4.12,3.74l19.23,37.51c3.24,6.33 13.33,5.8 15.77,-0.82l34.24,-93.55c2.2,-6.02 -4.12,-11.76 -10.74,-9.76z" />
+  //         <path d="m409.13,355.36l-19.56,-199.14c-0.84,-8.62 -8.8,-15.23 -18.34,-15.23l-46.79,0l0,-22.32c0,-25.97 -24.77,-47.11 -55.23,-47.11c-30.46,0 -55.23,21.13 -55.23,47.11l0,22.31l-45.12,0c-9.53,0 -17.5,6.61 -18.34,15.23l-13.43,136.71c-1.15,11.74 9.19,21.13 21.23,21.13c2.22,0 4.5,-0.32 6.79,-1.02l52.35,-15.81c2.87,-0.87 5.85,-1.31 8.83,-1.31c8.9,0 17.34,3.94 22.59,10.54c5.22,6.56 6.64,15.08 3.82,22.78l-16.36,44.71c-4.6,12.55 5.7,25.52 20.27,25.52l13.46,0l94.64,0c26.2,0.03 46.76,-20.4 44.44,-44.1zm-177.34,-236.7c0,-17.06 16.79,-30.92 37.41,-30.92c20.63,0 37.41,13.88 37.41,30.92l0,22.31l-36.57,0l-38.24,0l0,-22.31l-0.02,0zm152.08,256.24c-4.99,4.96 -11.81,7.68 -19.2,7.68l-94.64,0l-13.46,0c-0.94,0 -1.69,-0.35 -2.24,-1.03c-0.55,-0.69 -0.68,-1.44 -0.37,-2.25l16.36,-44.71c4.7,-12.83 2.32,-27.03 -6.38,-38c-8.73,-10.99 -22.81,-17.56 -37.67,-17.56c-4.99,0 -9.93,0.74 -14.71,2.16l-52.35,15.81c-0.32,0.1 -0.63,0.15 -0.92,0.15c-0.71,0 -1.47,-0.32 -2.03,-0.87c-0.7,-0.69 -0.71,-1.4 -0.68,-1.88l13.42,-136.55l44.95,0l0,18.07c0,4.47 3.99,8.09 8.91,8.09c4.93,0 8.91,-3.62 8.91,-8.09l0,-18.07l38.24,0l36.57,0l0,18.07c0,4.47 3.99,8.09 8.91,8.09c4.93,0 8.91,-3.62 8.91,-8.09l0,-18.07l46.61,0l19.54,198.98c0.71,6.71 -1.69,13.13 -6.68,18.07z" />
+  //         <path d="m146.94,398.1c-1.22,-1.1 -3.18,-1.1 -4.39,0l-40.57,36.85c-1.22,1.1 -1.22,2.88 0,3.99c0.6,0.54 1.39,0.82 2.19,0.82c0.79,0 1.59,-0.28 2.19,-0.82l40.57,-36.85c1.23,-1.1 1.23,-2.88 0.02,-3.99z" />
+  //         <path d="m108.05,409.27c0.79,0 1.59,-0.28 2.19,-0.82l17.87,-16.23c1.22,-1.1 1.22,-2.88 0,-3.99c-1.22,-1.1 -3.18,-1.1 -4.39,0l-17.87,16.23c-1.22,1.1 -1.22,2.88 0,3.99c0.62,0.54 1.41,0.82 2.2,0.82z" />
+  //         <path d="m151.3,418.72l-17.87,16.23c-1.22,1.1 -1.22,2.88 0,3.99c0.6,0.54 1.39,0.82 2.19,0.82c0.79,0 1.59,-0.28 2.19,-0.82l17.87,-16.23c1.22,-1.1 1.22,-2.88 0,-3.99c-1.2,-1.1 -3.16,-1.1 -4.37,0z" />
+  //       </g>
+  //     </g>
+  //   </svg>
+  // );
+}

@@ -1,0 +1,31 @@
+{
+  "name": "kawara-shop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Kawara Shop frontend application",
+  "author": {
+    "name": "Kawara Software development"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "next": "next dev --turbo",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.0.18",
+    "cheerio": "^1.0.0-rc.12",
+    "clsx": "^2.0.0",
+    "next": "14.0.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "stripe": "^14.4.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "eslint-config-next": "^13.5.4",
+    "postcss": "^8.4.31",
+    "prettier-plugin-tailwindcss": "^0.5.6",
+    "tailwindcss": "^3.3.5"
+  }
+}
