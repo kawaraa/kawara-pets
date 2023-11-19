@@ -48,9 +48,47 @@ export const content = {
     title: { en: "Collections", ar: "تشكيلات" },
     list: [
       {
-        title: { en: "Toys", ar: "دمية" },
-        path: "/lang/search/toy",
+        title: { en: "Grooming", ar: "عناية" },
+        path: "/lang/search/grooming",
+        // Brushes, combs, Dental care products
       },
+      {
+        title: { en: "Toys", ar: "ألعاب" },
+        path: "/lang/search/toy",
+        // Interactive, Chew, Plush Balls and fetch toys
+      },
+      {
+        title: { en: "Feeding", ar: "تغذية" },
+        path: "/lang/search/feeding",
+        // Feeding: Feeder, water dispenser, water bottles, Bowls And Pots
+      },
+      {
+        title: { en: "Furniture", ar: "أثاث وفرش" },
+        path: "/lang/search/furniture",
+        // Furniture: Cages, Bedding, litter, beds, mattresses, Blankets, throws, Crates, carriers, Cat trees, scratching posts, Aquarium
+      },
+      {
+        title: { en: "Apparel", ar: "ملابس" },
+        path: "/lang/search/apparel",
+        // Apparel: Clothing, costumes, Hats, caps, Sunglasses
+      },
+      {
+        title: { en: "Accessories", ar: "إكسسوارات" },
+        path: "/lang/search/accessories",
+        // Accessories: Leashes, Collars, Harnesses, Safety restraints, ID tags, Clickers, whistles, Training pads, Behavior modification tools
+      },
+      {
+        title: { en: "Technology", ar: "إلكترونيات" },
+        path: "/lang/search/technology",
+        // Technology: Pet trackers and GPS devices, Smart feeding systems, Pet cameras, Electronic pet doors
+      },
+      // For outdoor tools, just add the "Outdoor - Travel - Outdoor gear - hiking - camping - Portable" words at the beginning of every product title:
+      // For example:
+      // Outdoor Portable bowls
+      // Travel Portable bowls
+      // Outdoor gear Portable bowls
+      // hiking Portable bowls
+      // camping Portable bowls
     ],
   },
 };

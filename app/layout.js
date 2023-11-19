@@ -30,7 +30,9 @@ export default async function RootLayout({ children }) {
           {/* Todo: pass the currentRoute to the navbar to disable the active link: currentRoute={route} */}
           <Navbar lang={lang} />
           <Suspense>
-            <main className="min-h-[70vh]">{children}</main>
+            <main dir="auto" className="min-h-[70vh]">
+              {children}
+            </main>
             <Footer lang={lang} />
           </Suspense>
         </AppSessionContextProvider>

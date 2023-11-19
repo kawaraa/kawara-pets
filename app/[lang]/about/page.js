@@ -25,8 +25,8 @@ export function generateMetadata({ params }) {
 const content = {
   title: { en: `About ${siteName}`, ar: `معلومات عن ${siteName}` },
   h1: {
-    en: `Welcome to ${siteName}, where we believe in bringing you the finest products with a touch of personalized service. Our journey began with a simple vision - to curate a collection that reflects quality, style, and uniqueness`,
-    ar: `مرحبًا بك في ${siteName}، حيث نؤمن بتقديم أفضل المنتجات لك مع لمسة من الخدمة الشخصية. بدأت رحلتنا برؤية بسيطة - وهي تنسيق مجموعة تعكس الجودة والأناقة والتفرد`,
+    en: `Welcome to ${siteName}, where we believe in enhancing the lives of your furry friends through quality products and exceptional service. As fellow pet lovers, we understand the joy and companionship these adorable creatures bring to our lives, and we're dedicated to providing you with everything you need to keep them happy, healthy, and tail-waggingly content`,
+    ar: `مرحبًا بك في ${siteName}، حيث نؤمن بتعزيز حياة أصدقائك ذوي الفراء من خلال منتجات عالية الجودة وخدمة استثنائية. باعتبارنا محبين للحيوانات الأليفة، فإننا نتفهم السعادة والرفقة التي تجلبها هذه المخلوقات الرائعة لحياتنا، ونحن ملتزمون بتزويدك بكل ما تحتاجه لإبقائها سعيدة وصحية وممتعة.`,
   },
   h1P: {
     en: "The all-in-one local marketplace based e-commerce platform to start, run, and grow a business",
@@ -36,8 +36,8 @@ const content = {
     {
       h: { en: `Story of ${siteName}`, ar: `قصة ${siteName}` },
       p: {
-        en: `Founded in 2022, ${siteName} has evolved from a passion project into a thriving online destination for [your product category]. What sets us apart is our commitment to sourcing products that not only meet high standards but also tell a story. Each item in our collection has been carefully selected to bring you joy, functionality, and a touch of luxury.`,
-        ar: `تأسس ${siteName} في عام 2022، وقد تطور من مشروع شغوف إلى وجهة مزدهرة عبر الإنترنت لـ [فئة منتجك]. ما يميزنا هو التزامنا بتوفير المنتجات التي لا تلبي المعايير العالية فحسب، بل تحكي قصة أيضًا. تم اختيار كل منتج في مجموعتنا بعناية ليمنحك السعادة والعملية ولمسة من الفخامة.`,
+        en: `Founded in 2022, ${siteName} started with a simple mission to create a one-stop destination for pet owners seeking top-notch supplies and accessories. Our journey began with a passion for animals and a commitment to offering products that meet the diverse needs of pets and their devoted humans.`,
+        ar: `تأسس ${siteName} بدأت بمهمة بسيطة وهي إنشاء وجهة شاملة لأصحاب الحيوانات الأليفة الذين يبحثون عن مستلزمات وإكسسوارات من الدرجة الأولى. بدأت رحلتنا بشغف بالحيوانات والالتزام بتقديم المنتجات التي تلبي الاحتياجات المتنوعة للحيوانات الأليفة والبشر المتفانين.`,
       },
     },
     {
@@ -46,8 +46,8 @@ const content = {
         ar: "ما نقدمه",
       },
       p: {
-        en: `At ${siteName}, we offer a diverse range of different product category that cater to different tastes and preferences. Whether you're searching for Clothing or looking to explore new additions to your Gift collection, we've got you covered. Our inventory is constantly updated to keep up with the latest trends and meet your evolving needs`,
-        ar: `في ${siteName}، نقدم مجموعة متنوعة من فئات المنتجات المختلفة التي تلبي مختلف الأذواق والتفضيلات. سواء كنت تبحث عن الملابس أو تتطلع إلى استكشاف إضافات جديدة إلى مجموعة الهدايا الخاصة بك، فنحن نوفر لك كل ما تحتاجه. يتم تحديث مخزوننا باستمرار لمواكبة أحدث الاتجاهات وتلبية احتياجاتك المتطورة`,
+        en: `At ${siteName}, we offer a diverse range of different product category that cater to different tastes and preferences. Whether you're searching for Grooming tools or looking to explore new additions to your Pet Collection, we've got you covered. Our inventory is constantly updated to keep up with the latest trends and meet your evolving needs`,
+        ar: `في ${siteName}، نقدم مجموعة متنوعة من فئات المنتجات المختلفة التي تلبي مختلف الأذواق والتفضيلات. سواء كنت تبحث عن أدوات العناية بالحيوانات الأليفة أو تتطلع إلى استكشاف إضافات جديدة إلى مجموعة الحيوانات الأليفة الخاصة بك، فنحن نوفر لك كل ما تحتاجه. يتم تحديث مخزوننا باستمرار لمواكبة أحدث الاتجاهات وتلبية احتياجاتك المتطورة`,
       },
     },
     {
