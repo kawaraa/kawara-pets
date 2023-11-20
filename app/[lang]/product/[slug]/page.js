@@ -18,6 +18,14 @@ export default async function ProductPage({ params: { lang, slug }, searchParams
   product.highPrice = variants[variants.length - 1].price;
   product.comparePrice = variants[variants.length - 1].comparePrice;
 
+  const specifications = {};
+  const [description, otherText] = (product.description || "").trim().split("---");
+  otherText?.split("\n").map((line) => {
+    const [key, value] = line.split(":");
+    const k = key?.trim();
+    if (k) specifications[k] = value?.trim();
+  });
+
   const productJsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -52,10 +60,32 @@ export default async function ProductPage({ params: { lang, slug }, searchParams
             </div>
           </div>
 
-          {product.description && (
-            <div className="mt-20">
+          {description && (
+            <div dir="auto" className="mt-20">
               <h2 className="text-xl font-semibold mb-4">{desc[lang]}</h2>
-              <Prose className="overflow-hidden whitespace-pre-line" html={product.description} />
+              <Prose className="overflow-hidden whitespace-pre-line" html={description} />
+            </div>
+          )}
+
+          {specifications && (
+            <div dir="auto" className="mt-10">
+              <h3 className="font-semibold mb-2">{content.specificationTitle[lang]}</h3>
+
+              <table
+                dir="auto"
+                className="text-sm leading-tight table-auto border-collapse border border-slate-400"
+              >
+                <tbody>
+                  {Object.keys(specifications).map((k, i) => (
+                    <tr key={i}>
+                      <th scope="row" className="border border-slate-300 p-2 text-left">
+                        {k}
+                      </th>
+                      <td className="border border-slate-300 p-2">{specifications[k]}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           )}
         </div>
@@ -98,7 +128,7 @@ export async function generateMetadata({ params: { lang, slug } }) {
   };
 }
 
-async function RelatedProducts({ slug }) {
+async function RelatedProducts({ lang, slug }) {
   const relatedProducts = await getRecommendedProducts(slug);
   if (!relatedProducts.length) return null;
 
@@ -110,11 +140,11 @@ async function RelatedProducts({ slug }) {
 
   return (
     <div className="py-8">
-      <h2 className="mb-4 text-2xl font-bold">Related Products</h2>
+      <h2 className="mb-4 text-2xl font-bold">{content.relatedProducts[lang]}</h2>
       <ul className="flex w-full gap-4 overflow-x-auto pt-1">
         {relatedProducts.map((product, i) => (
           <li key={i} className="aspect-square w-full flex-none min-[475px]:w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5">
-            <Link className="relative h-full w-full" href={`/product/${slug}`}>
+            <Link className="relative h-full w-full" href={`/${lang}/product/${slug}`}>
               <GridTileImage
                 alt={product.name}
                 label={{
@@ -133,3 +163,8 @@ async function RelatedProducts({ slug }) {
     </div>
   );
 }
+
+const content = {
+  specificationTitle: { en: "Specifications", ar: "المواصفات" },
+  relatedProducts: { en: "Related Products", ar: "منتجات ذات صله" },
+};

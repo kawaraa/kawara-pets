@@ -20,7 +20,8 @@ export default async function Navbar({ lang }) {
               <li key={i}>
                 <Link
                   href={item.path.replace("lang", lang)}
-                  className="text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300">
+                  className="whitespace-nowrap text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300"
+                >
                   {item[lang]}
                 </Link>
               </li>
