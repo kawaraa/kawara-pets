@@ -11,9 +11,15 @@ export function createUrl(pathname, params) {
   return `${pathname}${paramsString.length ? "?" : ""}${paramsString}`;
 }
 
-export function extractLang(params, searchParams, cookieLang) {
-  let lang = (params?.lang || searchParams?.lang || cookieLang)?.toLowerCase();
-  return !/en|ar/gim.test(lang) ? "en" : lang;
+export function colorSeparatedToObject(text = "", object = {}) {
+  if (typeof text != "string") return object;
+  text.split("\n").map((line) => {
+    const [key, value] = line.split(":");
+    const k = key?.trim();
+    if (k) object[k] = value?.trim();
+  });
+
+  return object;
 }
 
 export class Cookies {

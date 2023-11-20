@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import Link from "next/link";
 import { getProductBySlug, getRecommendedProducts } from "../../../../service/api-provider";
+import { colorSeparatedToObject } from "../../../../service/utilities";
 import { GridTileImage } from "../../../../components/grid/tile";
 import { Gallery } from "../gallery";
 import { ProductSpecifications } from "../product-specifications";
@@ -18,13 +19,9 @@ export default async function ProductPage({ params: { lang, slug }, searchParams
   product.highPrice = variants[variants.length - 1].price;
   product.comparePrice = variants[variants.length - 1].comparePrice;
 
-  const specifications = {};
-  const [description, otherText] = (product.description || "").trim().split("---");
-  otherText?.split("\n").map((line) => {
-    const [key, value] = line.split(":");
-    const k = key?.trim();
-    if (k) specifications[k] = value?.trim();
-  });
+  const [description, servicesText, specText] = (product.description || "").trim().split("---");
+  const services = colorSeparatedToObject(servicesText);
+  const specifications = colorSeparatedToObject(specText);
 
   const productJsonLd = {
     "@context": "https://schema.org",
@@ -56,7 +53,12 @@ export default async function ProductPage({ params: { lang, slug }, searchParams
             </div>
 
             <div className="basis-full lg:basis-2/6">
-              <ProductSpecifications lang={lang} product={product} selectedOptions={searchParams} />
+              <ProductSpecifications
+                lang={lang}
+                product={product}
+                services={services}
+                selectedOptions={searchParams}
+              />
             </div>
           </div>
 
@@ -165,6 +167,6 @@ async function RelatedProducts({ lang, slug }) {
 }
 
 const content = {
-  specificationTitle: { en: "Specifications", ar: "المواصفات" },
+  specificationTitle: { en: "Specifications And Features", ar: "المواصفات والمميزات" },
   relatedProducts: { en: "Related Products", ar: "منتجات ذات صله" },
 };

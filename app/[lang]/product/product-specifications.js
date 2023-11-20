@@ -2,10 +2,9 @@ import { AddToCart } from "./add-to-cart";
 import Price from "../../../components/price";
 import { VariantSelector } from "./variant-selector";
 
-export function ProductSpecifications({ lang, product, selectedOptions }) {
+export function ProductSpecifications({ lang, product, services, selectedOptions }) {
   const options = Object.keys(selectedOptions).map((k) => selectedOptions[k]);
   const v = product.variants.find((v) => v.options.every((o) => options.includes(o.value)));
-  const services = product.meta?.services || {};
 
   return (
     <>
@@ -33,7 +32,7 @@ export function ProductSpecifications({ lang, product, selectedOptions }) {
 
       <AddToCart lang={lang} product={product} />
 
-      {product.meta?.services && (
+      {services && (
         <div dir="auto" className="mt-10">
           <h3 className="font-semibold mb-2">{content.servicesTitle[lang]}</h3>
           <table
