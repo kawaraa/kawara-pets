@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { getProductBySlug, getRecommendedProducts } from "../../../../service/api-provider";
 import { colorSeparatedToObject } from "../../../../service/utilities";
-import { GridTileImage } from "../../../../components/grid/tile";
+import { GridMediaTile } from "../../../../components/grid/tile";
 import { Gallery } from "../gallery";
 import { ProductSpecifications } from "../product-specifications";
 import Prose from "../../../../components/prose";
@@ -28,7 +28,7 @@ export default async function ProductPage({ params: { lang, slug }, searchParams
     "@type": "Product",
     name: product.name,
     description: product.description,
-    image: product.meta.images[0],
+    image: product.meta.media[0],
     offers: {
       "@type": "AggregateOffer",
       availability: availableForSale > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
@@ -49,7 +49,7 @@ export default async function ProductPage({ params: { lang, slug }, searchParams
         <div className="rounded-lg border border-neutral-200 bg-white p-8 dark:border-neutral-800 dark:bg-black md:p-12">
           <div className="flex flex-col lg:flex-row lg:gap-8">
             <div className="h-full w-full basis-full lg:basis-4/6">
-              <Gallery images={product.meta.images.map((image) => ({ src: image, altText: product.name }))} />
+              <Gallery lang={lang} media={product.meta.media.map((m) => ({ src: m, alt: product.name }))} />
             </div>
 
             <div className="basis-full lg:basis-2/6">
@@ -115,11 +115,11 @@ export async function generateMetadata({ params: { lang, slug } }) {
         follow: true,
       },
     },
-    openGraph: product.meta.images[0]
+    openGraph: product.meta.media[0]
       ? {
           images: [
             {
-              url: product.meta.images[0],
+              url: product.meta.media[0],
               width: 300,
               height: 300,
               alt: product.name,
@@ -147,14 +147,16 @@ async function RelatedProducts({ lang, slug }) {
         {relatedProducts.map((product, i) => (
           <li key={i} className="aspect-square w-full flex-none min-[475px]:w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5">
             <Link className="relative h-full w-full" href={`/${lang}/product/${slug}`}>
-              <GridTileImage
+              <GridMediaTile
+                lang={lang}
+                controls={true}
                 alt={product.name}
                 label={{
                   title: product.name,
                   amount: product.lowPrice,
                   currencyCode: "EUR",
                 }}
-                src={product.meta.images[0]}
+                src={product.meta.media[0]}
                 fill
                 sizes="(min-width: 1024px) 20vw, (min-width: 768px) 25vw, (min-width: 640px) 33vw, (min-width: 475px) 50vw, 100vw"
               />

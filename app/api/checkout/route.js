@@ -29,7 +29,7 @@ export async function POST(req) {
       if (!v) throw new Error("invalid line item.");
       if (v.quantity < quantity) throw new Error("item is out of stock.");
 
-      const images = [v.imageUrl || meta.images[0]] || image?.data?.url;
+      const images = [v.imageUrl || meta.media[0]] || image?.data?.url;
       const product_data = { name, images, metadata: { productId: id, variantId: v.id } };
       //  product_data: { description:"Some data for reference" },
       return { quantity, price_data: { unit_amount: v.price * 100, currency: "eur", product_data } };
