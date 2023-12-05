@@ -164,8 +164,8 @@ const content = {
   },
   modal: {
     title: {
-      en: "Please provide us your Email so we let you know when it's in stock.",
-      ar: "يرجى تزويدنا بالبريد الإلكتروني الخاص بك حتى نعلمك عندما يكون متوفرًا في المخزون.",
+      en: "Please provide us with your Email so we let you know when it's in stock.",
+      ar: "يرجى تزويدنا ببريدك الإلكتروني حتى نعلمك عندما يكون متوفرًا في المخزون.",
     },
     ok: { en: "Notify me", ar: "بلغني" },
   },

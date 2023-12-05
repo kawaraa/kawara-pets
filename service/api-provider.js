@@ -27,11 +27,6 @@ export async function getProductBySlug(slug = "") {
   return (await getProducts(slug, null, 1, 1))[0];
 }
 
-export async function getRecommendedProducts(slug, id) {
-  // Todo: this should return recommended products based on the product ID or slug
-  return getProductBySlug(slug);
-}
-
 export function removeAttributes(data) {
   if (!data?.attributes) return data;
   data.attributes.id = data.id;

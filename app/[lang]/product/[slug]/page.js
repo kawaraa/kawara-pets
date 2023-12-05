@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import Link from "next/link";
-import { getProductBySlug, getRecommendedProducts } from "../../../../service/api-provider";
+import { getProductBySlug, getProducts } from "../../../../service/api-provider";
 import { colorSeparatedToObject } from "../../../../service/utilities";
 import { GridMediaTile } from "../../../../components/grid/tile";
 import { Gallery } from "../gallery";
@@ -94,7 +94,7 @@ export default async function ProductPage({ params: { lang, slug }, searchParams
         </div>
 
         <Suspense>
-          <RelatedProducts {...props} slug={slug} />
+          <RelatedProducts {...props} category={product.category} />
         </Suspense>
       </div>
     </>
@@ -131,8 +131,8 @@ export async function generateMetadata({ params: { lang, slug } }) {
   };
 }
 
-async function RelatedProducts({ lang, currency, slug }) {
-  const relatedProducts = await getRecommendedProducts(slug);
+async function RelatedProducts({ lang, currency, category }) {
+  const relatedProducts = await getProducts(category);
   if (!relatedProducts.length) return null;
 
   relatedProducts.map((p) => {
@@ -147,7 +147,9 @@ async function RelatedProducts({ lang, currency, slug }) {
       <ul className="flex w-full gap-4 overflow-x-auto pt-1">
         {relatedProducts.map((product, i) => (
           <li key={i} className="aspect-square w-full flex-none min-[475px]:w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5">
-            <Link className="relative h-full w-full" href={`/${lang}/product/${slug}`}>
+            <Link
+              className="relative h-full w-full"
+              href={`/${lang}/product/${product.name.replaceAll(" ", "-")}`}>
               <GridMediaTile
                 lang={lang}
                 controls={true}

@@ -63,7 +63,7 @@ export default function Modal({
           )}
 
           <div dir="auto" className="flex-auto">
-            <h4 className="mb-1 text-lg text-center print:text-3xl font-semibold">{title}</h4>
+            <h4 className="mb-1 mx-8 text-lg text-center print:text-3xl font-semibold">{title}</h4>
             {children && (
               <div className="max-h-[70vh] mt-5 overflow-scroll no-srl-bar print:max-h-none print:overflow-auto">
                 {children}
