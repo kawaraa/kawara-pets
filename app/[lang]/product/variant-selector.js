@@ -4,7 +4,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { createUrl } from "../../../service/utilities";
 import { optionNames } from "../../../components/content/shared-content";
 
-export function VariantSelector({ lang, variants }) {
+export function VariantSelector({ lang, product: { meta, variants } }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -31,25 +31,21 @@ export function VariantSelector({ lang, variants }) {
           // Update the option params using the current option to reflect how the url *would* change,
           // if the option was clicked.
           optionSearchParams.set(optionNameLowerCase, value);
-          const optionUrl = createUrl(pathname, optionSearchParams);
-
-          // In order to determine if an option is available for sale, we need to:
-          // This is the "magic" that will cross check possible variant combinations and preemptively
-          // disable combinations that are not available. For example, if the color gray is only available in size medium,
-          // then all other sizes should be disabled.
 
           const entities = Array.from(optionSearchParams.entries());
 
-          // 1. Find the selected variant that is in param state
-          const selectedVariant = variants.find(
-            (v) => v.options.filter((o) => entities.find(([k, v]) => v == o.value)).length == entities.length
+          const selectedVariant = variants.find((v) =>
+            v.options.every((o) => entities.find(([k, v]) => v == o.value))
           );
+          let img = meta.media.findIndex((m) => m == selectedVariant?.imageUrl);
+          img = img < 0 ? 0 : img;
 
-          // 2. Check if there are variants available in the selected options or it's in stock.
+          optionSearchParams.set("media", img);
+          const optionUrl = createUrl(pathname, optionSearchParams);
+
           const isAvailableForSale = selectedVariant;
           const isDisabled = i > 0 && !isAvailableForSale;
 
-          // The option is active if it's in the url params.
           const isActive = searchParams.get(optionNameLowerCase) === value;
           return (
             <button
@@ -61,6 +57,7 @@ export function VariantSelector({ lang, variants }) {
                 else {
                   const newSearchParams = new URLSearchParams();
                   newSearchParams.set(optionNameLowerCase, value);
+                  newSearchParams.set("media", img);
                   router.replace(createUrl(pathname, newSearchParams), { scroll: false });
                 }
               }}

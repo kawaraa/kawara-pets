@@ -2,7 +2,7 @@ import { AddToCart } from "./add-to-cart";
 import Price from "../../../components/price";
 import { VariantSelector } from "./variant-selector";
 
-export function ProductSpecifications({ lang, product, services, selectedOptions }) {
+export function ProductSpecifications({ lang, product, services, selectedOptions, currency }) {
   const options = Object.keys(selectedOptions).map((k) => selectedOptions[k]);
   const v = product.variants.find((v) => v.options.every((o) => options.includes(o.value)));
 
@@ -15,7 +15,7 @@ export function ProductSpecifications({ lang, product, services, selectedOptions
             <>
               <Price
                 amount={product.comparePrice}
-                currencyCode="EUR"
+                currency={currency}
                 className="rounded-full bg-blue-400 px-2 py-1 text-sm text-white line-through"
               />
               <span className="w-3 h-3"></span>
@@ -23,12 +23,13 @@ export function ProductSpecifications({ lang, product, services, selectedOptions
           )}
           <Price
             amount={v?.price || product.lowPrice}
-            currencyCode="EUR"
+            currency={currency}
             className="rounded-full bg-blue-600 px-2 py-1 text-sm text-white"
           />
         </div>
       </div>
-      <VariantSelector lang={lang} variants={product.variants} />
+
+      <VariantSelector lang={lang} product={product} />
 
       <AddToCart lang={lang} product={product} />
 
@@ -37,8 +38,7 @@ export function ProductSpecifications({ lang, product, services, selectedOptions
           <h3 className="font-semibold mb-2">{content.servicesTitle[lang]}</h3>
           <table
             dir="auto"
-            className="w-full text-sm leading-tight table-auto border-collapse border border-slate-400"
-          >
+            className="w-full text-sm leading-tight table-auto border-collapse border border-slate-400">
             <tbody>
               {Object.keys(services).map((k, i) => (
                 <tr key={i}>

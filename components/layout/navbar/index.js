@@ -4,11 +4,12 @@ import MobileMenu from "./mobile-menu";
 import Search from "./search";
 import menu from "../../content/menu.json";
 import CartModal from "./cart/cart-modal";
+import CurrencySelector from "./currency-selector";
 
 // Todo: pass currentRoute to this component
 export default async function Navbar({ lang }) {
   return (
-    <nav className="relative flex items-center justify-between p-4 lg:px-6">
+    <nav className="fixed top-0 left-0 right-0 z-[1] bg-white/80 dark:bg-black/80 flex items-center justify-between p-4 lg:px-6">
       <div className="block flex-none md:hidden">
         <MobileMenu lang={lang} menu={menu} />
       </div>
@@ -20,8 +21,7 @@ export default async function Navbar({ lang }) {
               <li key={i}>
                 <Link
                   href={item.path.replace("lang", lang)}
-                  className="whitespace-nowrap text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300"
-                >
+                  className="whitespace-nowrap underline-offset-4 hover:underline ">
                   {item[lang]}
                 </Link>
               </li>
@@ -31,11 +31,10 @@ export default async function Navbar({ lang }) {
         <div className="hidden overflow-hidden justify-center md:flex md:mx-6 md:w-1/3">
           <Search lang={lang} />
         </div>
-        {/* Todo: Support the multi language and currency
-        <div>EN / AR</div>
-        <div>USD / EUR</div> 
-        */}
-        <div className="flex justify-end md:flex-1">
+
+        <CurrencySelector lang={lang} />
+
+        <div className="flex justify-end md:flex-1 ml-2">
           <CartModal lang={lang} />
         </div>
       </div>

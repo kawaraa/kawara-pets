@@ -1,8 +1,11 @@
+import { cookies } from "next/headers";
 import Grid from "../../../components/grid";
 import ProductGridItems from "../../../components/layout/product-grid-items";
 import { getProducts } from "../../../service/api-provider";
 
 export default async function SearchPage({ params: { lang, collection }, searchParams }) {
+  const [code = "EUR", rate = 1] = cookies().get("currency")?.value?.split(":") || [];
+  const props = { lang, currency: { code, rate } };
   const { page, pageSize, sort, q } = searchParams;
   const searchValue = (q || "").trim();
   const category = (collection || "").trim();
@@ -28,7 +31,7 @@ export default async function SearchPage({ params: { lang, collection }, searchP
 
       {products.length > 0 ? (
         <Grid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          <ProductGridItems lang={lang} products={products} />
+          <ProductGridItems {...props} products={products} />
         </Grid>
       ) : null}
     </>

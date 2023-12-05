@@ -1,4 +1,5 @@
 export const done = { en: "Done", ar: "تم" };
+export const send = { en: "Send", ar: "إرسال" };
 
 export const desc = { en: "description", ar: "الوصف" };
 

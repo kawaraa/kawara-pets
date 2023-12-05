@@ -1,18 +1,20 @@
 import { cookies } from "next/headers";
 import { Suspense } from "react";
-import { Carousel } from "../components/layout/carousel";
+import Carousel from "../components/layout/carousel";
 import { ThreeItemGrid } from "../components/grid/three-items";
 
 export default async function HomePage({ params }) {
-  const lang = params.lang || cookies().get("lang")?.value || "en";
-  // Use this in the server component: import { cookies } from "next/headers";
-  // cookies().set("lang", "en");
-  // console.log(cookies().get("lang")?.value);
+  const cookieStorage = cookies();
+  const lang = params.lang || cookieStorage.get("lang")?.value || "en";
+  const [code = "EUR", rate = 1] = cookieStorage.get("currency")?.value?.split(":") || [];
+  const props = { lang, currency: { code, rate } };
+  // cookies().set("lang", "en"); // You can set the cookie only on action
+
   return (
     <>
-      <ThreeItemGrid lang={lang} />
+      <ThreeItemGrid {...props} />
       <Suspense>
-        <Carousel lang={lang} />
+        <Carousel {...props} />
       </Suspense>
     </>
   );

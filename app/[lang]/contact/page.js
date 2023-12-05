@@ -1,11 +1,11 @@
 "use client";
 import { useContext, useEffect, useState } from "react";
+import { request } from "../../../service/request";
 import { AppSessionContext } from "../../app-session-context";
 import { InputField, Select, Textarea } from "../../../components/layout/inputs";
 import { Button } from "../../../components/layout/button";
-import { request } from "../../../service/request";
 import { bCls } from "../../../components/layout/tailwindcss-class";
-import { done } from "../../../components/content/shared-content";
+import { send, done } from "../../../components/content/shared-content";
 const siteName = process.env.SITE_NAME || "";
 
 export default function Contact({ params: { lang } }) {
@@ -21,10 +21,10 @@ export default function Contact({ params: { lang } }) {
       await request("/api/contact", "POST", data);
       e.target.reset();
       setLoading(false);
-      addMessage({ type: "success", text: done[lang], duration: 3 });
+      addMessage("success", done[lang], 3);
     } catch (error) {
       setLoading(false);
-      addMessage({ type: "error", text: error.message, duration: 5 });
+      addMessage("error", error.message, 5);
     }
   };
 
@@ -51,14 +51,29 @@ export default function Contact({ params: { lang } }) {
         inCls={`flex-1 rounded-md`}
       />
 
+      <InputField
+        type="email"
+        name="email"
+        required
+        min="10"
+        max="50"
+        autoComplete="given-name"
+        full
+        label={<span className="inline-block min-w-[90px]">{content.labels[1][lang]}</span>}
+        placeholder={content.labels[1][lang]}
+        title={content.labels[1][lang]}
+        cls="1 mt-3 flex flex-col sm:flex-row sm:items-center"
+        inCls={`flex-1 rounded-md`}
+      />
+
       <Select
         name="subject"
         required
-        label={<span className="inline-block min-w-[90px]">{content.labels[1][lang]}</span>}
+        label={<span className="inline-block min-w-[90px]">{content.labels[2][lang]}</span>}
         cls="mt-8 flex flex-col sm:flex-row sm:items-center"
         inCls="flex-1 rounded-md">
         {content.subjects.map((s, i) => (
-          <option value={s[lang]} key={i}>
+          <option value={s.en} key={i}>
             {s[lang]}
           </option>
         ))}
@@ -66,14 +81,14 @@ export default function Contact({ params: { lang } }) {
 
       <Textarea
         required
-        name="Message"
-        label={<span className="inline-block min-w-[90px]">{content.labels[2][lang]}</span>}
-        cls="mt-8 flex flex-col sm:flex-row "
+        name="message"
+        label={<span className="inline-block min-w-[90px]">{content.labels[3][lang]}</span>}
+        cls="mt-5 flex flex-col sm:flex-row "
       />
 
       <div className="text-center mt-10">
         <Button type="submit" loading={loading} cls="w-full sm:w-auto">
-          {content.btn[lang]}
+          {send[lang]}
         </Button>
       </div>
     </form>
@@ -84,10 +99,10 @@ const content = {
   h1: { en: "Contact us", ar: "تواصل معنا" },
   labels: [
     { en: "Name", ar: "الإ سم" },
+    { en: "Email", ar: "بريد إلكتروني" },
     { en: "Subject", ar: "الموضوع" },
     { en: "Message", ar: "الرسالة" },
   ],
-  btn: { en: "Send", ar: "إرسال" },
   subjects: [
     { en: "Product Inquiry", ar: "الاستفسار عن منتج" },
     { en: "Wholesale Inquiry", ar: "استفسار عن الجملة" },

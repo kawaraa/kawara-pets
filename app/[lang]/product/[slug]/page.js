@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import Link from "next/link";
@@ -9,17 +10,21 @@ import { ProductSpecifications } from "../product-specifications";
 import Prose from "../../../../components/prose";
 import { desc } from "../../../../components/content/shared-content";
 
+// export const revalidate = 1000; // 1 second in seconds, no need to it.
+// Next.js provides helpful functions you may need when fetching data in Server Components such as cookies and headers. These will cause the route to be dynamically rendered as they rely on request time information.
 export default async function ProductPage({ params: { lang, slug }, searchParams }) {
+  const [code = "EUR", rate = 1] = cookies().get("currency")?.value?.split(":") || [];
   const product = await getProductBySlug(slug);
   if (!product) return notFound();
 
+  const props = { lang, currency: { code, rate } };
   const variants = product.variants.sort((a, b) => a.price - b.price);
   const availableForSale = product.variants.reduce((acc, v) => acc + v.quantity, 0);
   product.lowPrice = variants[0].price;
   product.highPrice = variants[variants.length - 1].price;
   product.comparePrice = variants[variants.length - 1].comparePrice;
 
-  const [description, servicesText, specText] = (product.description || "").trim().split("---");
+  const [description, specText, servicesText] = (product.description || "").trim().split("---");
   const services = colorSeparatedToObject(servicesText);
   const specifications = colorSeparatedToObject(specText);
 
@@ -48,13 +53,10 @@ export default async function ProductPage({ params: { lang, slug }, searchParams
       <div className="mx-auto max-w-screen-2xl px-4">
         <div className="rounded-lg border border-neutral-200 bg-white p-8 dark:border-neutral-800 dark:bg-black md:p-12">
           <div className="flex flex-col lg:flex-row lg:gap-8">
-            <div className="h-full w-full basis-full lg:basis-4/6">
-              <Gallery lang={lang} media={product.meta.media.map((m) => ({ src: m, alt: product.name }))} />
-            </div>
-
-            <div className="basis-full lg:basis-2/6">
+            <Gallery lang={lang} media={product.meta.media.map((m) => ({ src: m, alt: product.name }))} />
+            <div>
               <ProductSpecifications
-                lang={lang}
+                {...props}
                 product={product}
                 services={services}
                 selectedOptions={searchParams}
@@ -75,8 +77,7 @@ export default async function ProductPage({ params: { lang, slug }, searchParams
 
               <table
                 dir="auto"
-                className="text-sm leading-tight table-auto border-collapse border border-slate-400"
-              >
+                className="text-sm leading-tight table-auto border-collapse border border-slate-400">
                 <tbody>
                   {Object.keys(specifications).map((k, i) => (
                     <tr key={i}>
@@ -93,7 +94,7 @@ export default async function ProductPage({ params: { lang, slug }, searchParams
         </div>
 
         <Suspense>
-          <RelatedProducts lang={lang} slug={slug} />
+          <RelatedProducts {...props} slug={slug} />
         </Suspense>
       </div>
     </>
@@ -130,7 +131,7 @@ export async function generateMetadata({ params: { lang, slug } }) {
   };
 }
 
-async function RelatedProducts({ lang, slug }) {
+async function RelatedProducts({ lang, currency, slug }) {
   const relatedProducts = await getRecommendedProducts(slug);
   if (!relatedProducts.length) return null;
 
@@ -154,11 +155,13 @@ async function RelatedProducts({ lang, slug }) {
                 label={{
                   title: product.name,
                   amount: product.lowPrice,
-                  currencyCode: "EUR",
+                  currency,
                 }}
                 src={product.meta.media[0]}
-                fill
-                sizes="(min-width: 1024px) 20vw, (min-width: 768px) 25vw, (min-width: 640px) 33vw, (min-width: 475px) 50vw, 100vw"
+                // fill
+                // sizes="(min-width: 1024px) 20vw, (min-width: 768px) 25vw, (min-width: 640px) 33vw, (min-width: 475px) 50vw, 100vw"
+                width="1000"
+                height="1000"
               />
             </Link>
           </li>

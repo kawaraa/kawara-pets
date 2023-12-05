@@ -2,20 +2,27 @@ import Link from "next/link";
 import { getCollection } from "../../service/api-provider";
 import { GridMediaTile } from "../../components/grid/tile";
 
-export async function ThreeItemGrid({ lang }) {
+export async function ThreeItemGrid({ lang, currency }) {
   // Home page Collections are the products that have `storefront-items` vendor.
   const products = await getCollection("storefront-items");
 
   return (
     <section className="mx-auto grid max-w-screen-2xl gap-4 px-4 pb-4 md:grid-cols-6 md:grid-rows-2">
       {products.map((p, i) => (
-        <ThreeItemGridItem lang={lang} item={p} size={i == 0 && "full"} priority={i < 3} key={i} />
+        <ThreeItemGridItem
+          lang={lang}
+          currency={currency}
+          item={p}
+          size={i == 0 && "full"}
+          priority={i < 3}
+          key={i}
+        />
       ))}
     </section>
   );
 }
 
-function ThreeItemGridItem({ lang, item, size, priority }) {
+function ThreeItemGridItem({ lang, currency, item, size, priority }) {
   if (!item?.variants) return null;
 
   const variants = item.variants.sort((a, b) => a.price - b.price);
@@ -23,8 +30,7 @@ function ThreeItemGridItem({ lang, item, size, priority }) {
     <div className={size === "full" ? "md:col-span-4 md:row-span-2" : "md:col-span-2 md:row-span-1"}>
       <Link
         className="relative block aspect-square h-full w-full"
-        href={`/${lang}/product/${item.name.replaceAll(" ", "-")}`}
-      >
+        href={`/${lang}/product/${item.name.replaceAll(" ", "-")}`}>
         <GridMediaTile
           lang={lang}
           controls={true}
@@ -37,7 +43,7 @@ function ThreeItemGridItem({ lang, item, size, priority }) {
             position: size === "full" ? "center" : "bottom",
             title: item.name,
             amount: variants[0].price,
-            currencyCode: "EUR",
+            currency,
           }}
         />
       </Link>

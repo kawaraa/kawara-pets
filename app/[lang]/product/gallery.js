@@ -28,10 +28,14 @@ export function Gallery({ lang, media }) {
   const currentMedia = media[mediaIndex];
 
   return (
-    <>
-      <div className="relative aspect-square h-full max-h-[550px] w-full overflow-hidden">
+    <div className="max-h-[80vh] lg:max-w-xl xl:max-w-3xl min-h-full flex flex-col justify-center">
+      <div className="relative overflow-hidden flex-1 aspect-square">
         {currentMedia?.src && currentMedia.src.match(/video|mp4/gim) ? (
-          <video controls title={currentMedia.alt} poster={media[0].src} className="w-full h-auto">
+          <video
+            controls
+            title={currentMedia.alt}
+            poster={media[0].src}
+            className="aspect-square h-full mx-auto">
             <source src={currentMedia.src} type="video/mp4" />
             {currentMedia.alt}
           </video>
@@ -39,23 +43,24 @@ export function Gallery({ lang, media }) {
           <Image
             src={currentMedia.src}
             alt={currentMedia.alt}
-            sizes="(min-width: 1024px) 66vw, 100vw"
-            fill
+            // sizes="(min-width: 1024px) 66vw, 100vw"
+            // fill
+            width="1000"
+            height="1000"
             priority={true}
-            className="h-full w-full object-contain"
+            className="h-full object-contain preview"
           />
         )}
       </div>
 
       {media.length > 1 ? (
-        <div className="flex w-full justify-center">
-          <div className="mx-auto flex h-11 items-center rounded-full border border-white bg-neutral-50/80 text-neutral-500 backdrop-blur dark:border-black dark:bg-neutral-900/80">
+        <div className="w-full flex justify-center items-center">
+          <div className="mx-auto flex h-8 items-center rounded-full border border-white bg-neutral-50/80 text-neutral-500 backdrop-blur dark:border-black dark:bg-neutral-900/80">
             <Link
               aria-label="Previous product image"
               href={previousUrl}
               className={buttonClassName}
-              scroll={false}
-            >
+              scroll={false}>
               <ArrowLeftIcon className="h-5" />
             </Link>
             <div className="mx-1 h-6 w-px bg-neutral-500"></div>
@@ -67,7 +72,7 @@ export function Gallery({ lang, media }) {
       ) : null}
 
       {media.length > 1 ? (
-        <ul className="my-2 flex items-center justify-center gap-2 overflow-auto py-1 lg:mb-0">
+        <ul className="no-srl-bar min-h-[60px] my-2 flex items-center gap-2 overflow-auto lg:mb-0">
           {media.map((m, index) => {
             const isActive = index === mediaIndex;
             const mediaSearchParams = new URLSearchParams(searchParams.toString());
@@ -75,20 +80,21 @@ export function Gallery({ lang, media }) {
             mediaSearchParams.set("media", index.toString());
 
             return (
-              <li key={m.src} className="h-20 w-20">
+              <li key={m.src} className="aspect-square w-[60px] min-w-[60px] ">
                 <Link
                   aria-label="Enlarge product image"
                   href={createUrl(pathname, mediaSearchParams)}
                   scroll={false}
-                  className="h-full w-full"
-                >
+                  className="h-full w-full">
                   <GridMediaTile
                     lang={lang}
                     alt={m.alt}
                     src={m.src}
-                    poster={media[0].src}
-                    width={80}
-                    height={80}
+                    poster={media[0]?.src}
+                    // sizes="(min-width: 1024px) 66vw, 100vw"
+                    // fill
+                    width="1000"
+                    height="1000"
                     active={isActive}
                   />
                 </Link>
@@ -97,6 +103,6 @@ export function Gallery({ lang, media }) {
           })}
         </ul>
       ) : null}
-    </>
+    </div>
   );
 }

@@ -14,22 +14,23 @@ import { request } from "../../../../service/request";
 const taxPercentage = +process.env.NEXT_PUBLIC_TAX_PERCENTAGE || 0;
 
 export default function CartModal({ lang }) {
-  const { loading, cart, isCartOpen, setIsCartOpen, addMessage } = useContext(AppSessionContext);
+  const { loading, currency, cart, isCartOpen, setIsCartOpen, addMessage } = useContext(AppSessionContext);
   const totalAmount = cart.reduce((total, item) => total + item.price, 0);
   const totalTaxAmount = (totalAmount / 100) * taxPercentage;
 
   const openCart = () => setIsCartOpen(true);
   const closeCart = () => setIsCartOpen(false);
 
-  // Information component
-  // Shipping component
-  // Payment component
+  // Information component > Shipping component > Payment component
   // Like the checkout page on "https://demo.vercel.store" demo
   const redirectToStripe = async (e) => {
     e.preventDefault();
     const lineItems = cart.map(({ productId, variantId, quantity }) => ({ productId, variantId, quantity }));
-    const res = await request(`/api/checkout?lang=${lang}`, "POST", { lineItems }).catch((e) => e);
-    if (res?.message) addMessage({ type: "error", text: validateError(res.message, lang), duration: 5 });
+    const url = `/api/checkout?lang=${lang}&currency=${currency.code}&timezone=${
+      Intl.DateTimeFormat().resolvedOptions().timeZone
+    }`;
+    const res = await request(url, "POST", { lineItems }).catch((e) => e);
+    if (res?.message) addMessage("error", validateError(res.message, lang), 5);
     else window.location.href = res.redirectTo;
   };
 
@@ -52,8 +53,7 @@ export default function CartModal({ lang }) {
         enter="opacity-100 backdrop-blur-[.5px]"
         exit="opacity-0 backdrop-blur-none"
         time="200"
-        aria-hidden="true"
-      ></Transition>
+        aria-hidden="true"></Transition>
 
       {/* Todo: prevent window scrolling when the child is fixed */}
       <Transition
@@ -65,8 +65,7 @@ export default function CartModal({ lang }) {
         exit="translate-x-full"
         time="200"
         role="dialog"
-        aria-hidden="false"
-      >
+        aria-hidden="false">
         <div className="flex items-center justify-between">
           <p className="text-lg font-semibold">{content.cart[lang]}</p>
 
@@ -79,7 +78,7 @@ export default function CartModal({ lang }) {
         {cart.length === 0 ? (
           <div className="mt-20 flex w-full flex-col items-center justify-center overflow-hidden">
             <ShoppingCartIcon className="h-16" />
-            <p className="mt-6 text-center text-2xl">{content.empty[lang]}</p>
+            <p className="mt-6 text-center text-2xl font-bold">{content.empty[lang]}</p>
           </div>
         ) : (
           <div className="flex h-full flex-col justify-between overflow-hidden p-1">
@@ -97,8 +96,7 @@ export default function CartModal({ lang }) {
                 return (
                   <li
                     key={i}
-                    className="flex w-full flex-col border-b border-neutral-300 dark:border-neutral-700"
-                  >
+                    className="flex w-full flex-col border-b border-neutral-300 dark:border-neutral-700">
                     <div className="relative flex w-full flex-row justify-between px-1 py-4">
                       <div className="absolute z-[1] -mt-2 ml-[55px]">
                         <DeleteItemButton variantId={item.variantId} />
@@ -114,18 +112,20 @@ export default function CartModal({ lang }) {
                           />
                         </div>
 
-                        <div className="flex flex-1 flex-col text-base">
-                          <span className="text-sm leading-tight">{item.name}</span>
-                          <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                        <p className="flex-1 ">
+                          <span className="block text-sm max-h-14 leading-tight overflow-hidden text-ellipsis break-all">
+                            {item.name}
+                          </span>
+                          <span className="block text-sm text-neutral-500 dark:text-neutral-400">
                             {item.options.map((o) => o.value).join(" / ")}
-                          </p>
-                        </div>
+                          </span>
+                        </p>
                       </Link>
                       <div className="flex h-16 flex-col justify-between">
                         <Price
                           className="flex justify-end space-y-2 text-right text-sm"
                           amount={item.price}
-                          currencyCode={"EUR"}
+                          currency={currency}
                         />
                         <div className="ml-auto flex h-9 flex-row items-center rounded-full border border-neutral-200 dark:border-neutral-700">
                           <EditItemQuantityButton variantId={item.variantId} type="minus" />
@@ -146,7 +146,7 @@ export default function CartModal({ lang }) {
                 <Price
                   className="text-right text-base text-black dark:text-white"
                   amount={totalTaxAmount}
-                  currencyCode={"EUR"}
+                  currency={currency}
                 />
               </div>
               <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 pt-1 dark:border-neutral-700">
@@ -159,15 +159,14 @@ export default function CartModal({ lang }) {
                 <Price
                   className="text-right text-base text-black dark:text-white"
                   amount={totalAmount}
-                  currencyCode={"EUR"}
+                  currency={currency}
                 />
               </div>
             </div>
             <a
               href="#"
               onClick={redirectToStripe}
-              className="block w-full rounded-full bg-blue-600 p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
-            >
+              className="block w-full rounded-full bg-blue-600 p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100">
               {content.checkout[lang]}
             </a>
           </div>

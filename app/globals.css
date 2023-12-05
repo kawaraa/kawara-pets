@@ -60,3 +60,52 @@ button {
 .dark .cd_hr:hover {
   box-shadow: 3px 3px 20px 5px #ffffff1a;
 }
+
+/* Good for bar loading animation: transition-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1); */
+.lazy-c {
+  animation: lazy-c 0.4s ease-in 0.1s reverse backwards;
+}
+.lazy-b {
+  animation: lazy-b 0.4s ease-in 0.1s reverse backwards;
+  /* animation-delay: attr(data-d); */
+  /* animation-delay: calc(attr(data-d) * 100ms); */
+  /* animation-delay: calc(var(--a-d) * 100ms); */
+}
+.lazy-r {
+  /* transform-origin: top right; */
+  animation: lazy-r 0.4s ease-in 0.1s reverse backwards;
+}
+.lazy-l {
+  transform-origin: top left;
+  animation: lazy-l 0.4s ease-in 0.1s reverse backwards;
+}
+.msg {
+  animation: msg-top 0.3s ease-out reverse backwards;
+}
+
+@keyframes lazy-c {
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+@keyframes lazy-b {
+  100% {
+    opacity: 0;
+    transform: translate(0, 50px);
+  }
+}
+@keyframes lazy-r {
+  100% {
+    opacity: 0;
+    /* transform: rotate(-10deg) translate(5%, 80%); */
+    transform: translate(20px, 30px);
+  }
+}
+@keyframes lazy-l {
+  100% {
+    opacity: 0;
+    /* transform: rotate(10deg) translate(-5%, 50%); */
+    transform: translate(-20px, 30px);
+  }
+}

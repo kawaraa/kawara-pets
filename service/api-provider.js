@@ -37,3 +37,10 @@ export function removeAttributes(data) {
   data.attributes.id = data.id;
   return data.attributes;
 }
+
+export function getGeoInfo(ip) {
+  // https://ipinfo.io/json
+  return serverRequest(`https://get.geojs.io/v1/ip/country/${ip}.json`, undefined, undefined, undefined, {
+    cache: "no-store",
+  }).catch(() => ({}));
+}

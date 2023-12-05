@@ -1,7 +1,6 @@
-export async function POST(req) {
-  const body = await req.json();
-  console.log(body); // { name: "Mr Tester" , subject: 'General Inquiry', Message: 'ewfwegwf' }
-  // Todo: Complete this, save the data either in Strapi, Spreadsheet or send it to and Email using AppScript
+import { serverRequest } from "../../../service/request";
 
+export async function POST(req) {
+  await serverRequest(process.env.GOOGLE_APP_SCRIPT_URL, "POST", { body: await req.json() });
   return Response.json({ success: true });
 }

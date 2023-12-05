@@ -5,10 +5,11 @@ module.exports = {
   content: ["./app/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      // fontFamily: {
-      //   arabic: ["Noto Kufi Arabic", "sans-serif"],
-      //   monospace: "monospace",
-      // },
+      screens: { xs: "450px" },
+      fontFamily: {
+        arabic: ["Noto Kufi Arabic", "sans-serif"],
+        monospace: "monospace",
+      },
       keyframes: {
         fadeIn: {
           from: { opacity: 0 },

@@ -16,7 +16,7 @@ export function EditItemQuantityButton({ type, variantId }) {
     if (qty < 1) {
       updateCart(cart.filter((item) => item.variantId != variantId));
     } else if (newCart[index].maxQuantity < qty) {
-      addMessage({ type: "warning", text: content.maxQuantity[lang], duration: 5 });
+      addMessage("warning", content.maxQuantity[lang], 5);
     } else {
       newCart[index].quantity = qty;
       updateCart(newCart);

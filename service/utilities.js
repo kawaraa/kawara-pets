@@ -48,23 +48,26 @@ export class Cookies {
   }
 }
 
-export function copyText(text = "", cb) {
-  const copy = () => {
-    try {
-      const input = document.createElement("input");
-      document.body.appendChild(input);
-      input.value = text;
-      input.select(); /* Select the text field */
-      input.setSelectionRange(0, 99999); /* Select the text for mobile devices */
-      document.execCommand("copy");
-      input.remove();
-    } catch (er) {
-      if (cb) cb(false);
-    }
-    if (cb) cb(true);
-  };
-  if (!navigator.clipboard) return cb(false);
-  navigator.clipboard.writeText(text).then(() => cb(true), copy);
+export function copyText(text = "") {
+  return new Promise((res, rej) => {
+    const copy = () => {
+      try {
+        const input = document.createElement("input");
+        document.body.appendChild(input);
+        input.value = text;
+        input.select(); /* Select the text field */
+        input.setSelectionRange(0, 99999); /* Select the text for mobile devices */
+        document.execCommand("copy");
+        input.remove();
+        res(true);
+      } catch (er) {
+        rej(false);
+      }
+    };
+
+    if (!navigator.clipboard) return copy();
+    navigator.clipboard.writeText(text).then(() => res(true), copy);
+  });
 }
 
 export function validateError(error, lang) {

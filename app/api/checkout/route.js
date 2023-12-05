@@ -1,4 +1,9 @@
+import getCountryByTimezone from "k-utilities/geo-and-timezone/get-country-by-timezone";
 import { serverRequest } from "../../../service/request";
+import { getCurrenciesExchangeRates } from "../cron";
+import euCountries from "../../../components/content/eu-countries.json";
+import { getGeoInfo } from "../../../service/api-provider";
+
 const stripe = require("stripe")(process.env.STRIPE_SC_KEY);
 const host = process.env.NEXT_PUBLIC_HOST;
 const apiHost = process.env.NEXT_PUBLIC_API_HOST;
@@ -7,7 +12,19 @@ export async function POST(req) {
   try {
     const { searchParams } = new URL(req.url);
     const lang = searchParams.get("lang");
+    let currency = searchParams.get("currency");
+    const ip = searchParams.get("ip");
+    let { country } = ip ? await getGeoInfo(ip) : getCountryByTimezone(searchParams.get("timezone"));
+
     const body = await req.json();
+
+    if (process.env.NEXT_PUBLIC_HOST?.includes("localhost") || euCountries[country]) country = "EU";
+
+    if (!process.env.EXCHANGE_RATE) {
+      process.env.EXCHANGE_RATE = JSON.stringify(await getCurrenciesExchangeRates());
+    }
+    const currencyRate = JSON.parse(process.env.EXCHANGE_RATE)[currency] || 1;
+    if (!currencyRate || currencyRate == 1) currency = "EUR";
 
     const productIds = body.lineItems.reduce((acc, it, i) => {
       return acc + `&filters[id][$in][${i}]=${it.productId}`;
@@ -28,11 +45,30 @@ export async function POST(req) {
 
       if (!v) throw new Error("invalid line item.");
       if (v.quantity < quantity) throw new Error("item is out of stock.");
-
+      if (typeof meta.shippableTo[country] != "string") {
+        throw new Error(`This item can not be shipped to "${country}"`);
+      }
+      const options = v.options.map((o) => o.value).join(" / ");
       const images = [v.imageUrl || meta.media[0]] || image?.data?.url;
-      const product_data = { name, images, metadata: { productId: id, variantId: v.id } };
-      //  product_data: { description:"Some data for reference" },
-      return { quantity, price_data: { unit_amount: v.price * 100, currency: "eur", product_data } };
+
+      return {
+        quantity,
+        price_data: {
+          unit_amount: Number.parseInt(+currencyRate * +v.price * 100),
+          currency,
+          product_data: {
+            name,
+            images,
+            metadata: {
+              productId: id,
+              variantId: v.id,
+              options,
+              sourceLink: meta.shippableTo[country] || meta.shippableTo.EU,
+            },
+            // description: "Some data for reference",
+          },
+        },
+      };
     });
 
     const session = await stripe.checkout.sessions
@@ -48,8 +84,8 @@ export async function POST(req) {
     if (!session?.url) throw new Error("payment error.");
 
     return Response.json({ redirectTo: session.url });
-    // return Response.redirect(session.url); // This does not word with from end request function.
   } catch (error) {
+    console.log("Payment Error: >>> ", error);
     return Response.json({ message: error.message }, { status: 400 });
   }
 }

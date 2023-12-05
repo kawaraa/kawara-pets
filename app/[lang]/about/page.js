@@ -19,7 +19,7 @@ export default function About({ params: { lang } }) {
 
 export function generateMetadata({ params }) {
   const lang = params.lang;
-  return getMetadata({ lang, title: content.h1[lang] + " - ALM" });
+  return getMetadata({ lang, title: content.h1[lang] + " - Kawara Pets" });
 }
 
 const content = {

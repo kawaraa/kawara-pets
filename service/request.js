@@ -1,4 +1,5 @@
 import config from "./config.json";
+import { Cookies } from "./utilities";
 config.apiHost = process.env.NEXT_PUBLIC_API_HOST;
 
 export function getURL(key) {
@@ -23,7 +24,7 @@ export async function serverRequest(url, method = "GET", data, type = "applicati
 }
 
 export async function request(url, method = "GET", data, type = "application/json", arg = {}) {
-  const token = window.localStorage.getItem("accessToken");
+  const token = Cookies.get("accessToken");
   const headers = {};
   let body = null;
   let aUrl = getURL(url) || url;

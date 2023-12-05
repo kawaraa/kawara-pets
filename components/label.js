@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import Price from "./price";
 
-const Label = ({ title, amount, currencyCode, position = "bottom" }) => {
+const Label = ({ title, amount, currency, position = "bottom" }) => {
   return (
     <div
       className={clsx("absolute bottom-0 left-0 flex w-full px-4 pb-4 @container/label", {
@@ -12,7 +12,7 @@ const Label = ({ title, amount, currencyCode, position = "bottom" }) => {
         <Price
           className="flex-none rounded-full bg-blue-600 p-2 text-white"
           amount={amount}
-          currencyCode={currencyCode}
+          currency={currency}
           currencyCodeClassName="hidden @[275px]/label:inline"
         />
       </div>

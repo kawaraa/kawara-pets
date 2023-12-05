@@ -111,7 +111,7 @@ export function InputWithSelect({ label, options, value, onChange, cls, ...p }) 
 
 export function CheckInput({ children, size = "20", color = 0, cls, onChange, ...p }) {
   const [changed, setChanged] = useState(false);
-  const colors = ["border-red", "border-pc", "border-pc1", "border-bg3", "border-bg8"];
+  const colors = ["border-red-400", "border-green-400"];
   const btnRef = useRef(null);
   const checkSize = Math.round(+size / 3);
   const checkBorder = Math.round(+size / 5);
@@ -137,7 +137,7 @@ export function CheckInput({ children, size = "20", color = 0, cls, onChange, ..
           id={cls}
           title={p.title || p.name}
           aria-label={p.title || p.name}
-          className={`peer absolute top-0 left-0 w-full h-full appearance-none ${cardBgCls} border border-bf ${radius} cursor-pointer`}
+          className={`peer absolute top-0 left-0 w-full h-full appearance-none ${cardBgCls} ${bCls} ${bHrFsCls} ${radius} cursor-pointer`}
           {...p}
         />
         <span
