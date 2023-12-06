@@ -27,7 +27,7 @@ const FooterMenuItem = ({ item, lang }) => {
   return (
     <li>
       <Link
-        href={item.path}
+        href={item.path.replace("lang", lang)}
         className={clsx(
           "block p-2 text-lg underline-offset-4 hover:text-black hover:underline dark:hover:text-neutral-300 md:inline-block md:text-sm",
           {
