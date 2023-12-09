@@ -14,7 +14,7 @@ export function GridMediaTile({ lang, isInteractive = true, active, label, ...pr
       )}>
       {props.src && props.src.match(/video|mp4/gim) ? (
         <>
-          <video controls title={props.alt} poster={props.poster} className="w-full h-auto">
+          <video muted title={props.alt} poster={props.poster} className="w-full h-auto">
             <source src={props.src} type="video/mp4" />
             {props.alt}
           </video>

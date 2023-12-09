@@ -33,6 +33,7 @@ export function Gallery({ lang, media }) {
         {currentMedia?.src && currentMedia.src.match(/video|mp4/gim) ? (
           <video
             controls
+            muted
             title={currentMedia.alt}
             poster={media[0].src}
             className="aspect-square h-full mx-auto">

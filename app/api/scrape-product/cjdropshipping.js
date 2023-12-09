@@ -6,6 +6,8 @@ export default async function getCjdropshippingProduct(link) {
   const product = await getProduct(link.split("-p-")[1].replace(".html", ""));
   const productOptionsNames = product.productKeyEn.split("-");
 
+  if (product.productVideo) product.productImageSet.push(product.productVideo);
+
   const newVariants = product.variants.map((v) => {
     const options = v.variantKey.split("-").map((k, i) => {
       const name = optionNames.find((n) => new RegExp(n.slice(0, -1), "gim").test(productOptionsNames[i]));
