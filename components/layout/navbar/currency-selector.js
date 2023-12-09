@@ -26,7 +26,7 @@ export default function CurrencySelector({ lang }) {
         value={currency.code}
         onChange={handleCurrencyChange}
         id="country"
-        className={`${cardBgCls} ${bCls} ${bHrFsCls} rounded-lg w-full p-2.5 dark:text-white`}>
+        className={`${cardBgCls} ${bCls} ${bHrFsCls} rounded-lg w-full text-center py-2 dark:text-white`}>
         {Object.keys(currencies).map((k, i) => (
           <option value={k} key={i}>
             {currencies[k]} {k}

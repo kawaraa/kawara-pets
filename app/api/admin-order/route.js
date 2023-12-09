@@ -82,7 +82,7 @@ const content = {
           "We appreciate your business! We will package your order and ship it to you within 24 hours",
           "We hope you will like our products and service",
           "Best regards,",
-          "Kawara Shop team",
+          "Kawara Pets Team",
         ],
       },
       ar: {
@@ -92,7 +92,7 @@ const content = {
           "سنقوم بتغليف طلبك وإرساله إليك في أقرب وقت ممكن",
           "نأمل أن تعجبك منتجاتنا وخدماتنا",
           "أطيب التحيات،",
-          "فريق متجر كاوارا",
+          "فريق كاوارا للحيوانات الأليفة",
         ],
       },
     },

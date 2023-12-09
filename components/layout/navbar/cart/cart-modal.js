@@ -15,7 +15,7 @@ const taxPercentage = +process.env.NEXT_PUBLIC_TAX_PERCENTAGE || 0;
 
 export default function CartModal({ lang }) {
   const { loading, currency, cart, isCartOpen, setIsCartOpen, addMessage } = useContext(AppSessionContext);
-  const totalAmount = cart.reduce((total, item) => total + item.price, 0);
+  const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
   const totalTaxAmount = (totalAmount / 100) * taxPercentage;
 
   const openCart = () => setIsCartOpen(true);

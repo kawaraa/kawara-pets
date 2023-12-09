@@ -75,7 +75,7 @@ export default function Orders({ params: { lang } }) {
                 <span className="">{o.name}</span>
                 <span className="flex-auto"></span>
                 <span className="mx-3 bg-yellow-400 px-2 text-sm text-white rounded-full">
-                  {content.statuses[o.status][lang] || content.statuses[o.status]}
+                  {content.statuses[o.status][lang] || o.status}
                 </span>
               </>
             }
