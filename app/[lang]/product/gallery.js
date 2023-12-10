@@ -86,6 +86,7 @@ export function Gallery({ lang, media }) {
                   aria-label="Enlarge product image"
                   href={createUrl(pathname, mediaSearchParams)}
                   scroll={false}
+                  replace
                   className="h-full w-full">
                   <GridMediaTile
                     lang={lang}
