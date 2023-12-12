@@ -1,25 +1,12 @@
-import { cookies } from "next/headers";
-import { Suspense } from "react";
-import Carousel from "../components/layout/carousel";
-import { ThreeItemGrid } from "../components/grid/three-items";
+import Layout from "./[lang]/layout";
+import HomePageByLang from "./[lang]/page";
 
-export default async function HomePage({ params }) {
-  const cookieStorage = cookies();
-  const lang = params.lang || cookieStorage.get("lang")?.value || "en";
-  const [code = "EUR", rate = 1] = cookieStorage.get("currency")?.value?.split(":") || [];
-  const props = { lang, currency: { code, rate } };
-  // cookies().set("lang", "en"); // You can set the cookie only on action
-
+export default function Page(props) {
   return (
-    <>
-      <ThreeItemGrid {...props} />
-      <Suspense>
-        <Carousel {...props} />
-      </Suspense>
-    </>
+    <Layout {...props} params={{ lang: "en" }}>
+      <HomePageByLang {...props} params={{ lang: "en" }} />
+    </Layout>
   );
 }
 
-export const metadata = {
-  openGraph: { type: "website" },
-};
+export const metadata = { alternates: { canonical: "/en" } };

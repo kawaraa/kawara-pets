@@ -6,10 +6,11 @@ import menu from "../../content/menu.json";
 import CartModal from "./cart/cart-modal";
 import CurrencySelector from "./currency-selector";
 
-// Todo: pass currentRoute to this component
 export default async function Navbar({ lang }) {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-[1] bg-white/80 dark:bg-black/80 flex items-center justify-between p-4 lg:px-6">
+    <nav
+      dir="ltr"
+      className="fixed top-0 left-0 right-0 z-[1] bg-white/80 dark:bg-black/80 flex items-center justify-between p-4 lg:px-6">
       <div className="block flex-none md:hidden">
         <MobileMenu lang={lang} menu={menu} />
       </div>
