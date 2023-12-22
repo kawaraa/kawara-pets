@@ -6,7 +6,7 @@ import { Cookies } from "../../../service/utilities";
 import { linkCls } from "../../../components/layout/tailwindcss-class";
 import Modal from "../../../components/layout/modal";
 import { InputField } from "../../../components/layout/inputs";
-const siteName = process.env.SITE_NAME || "Kawara Pets";
+const siteName = process.env.SITE_NAME || "";
 
 export default function AddProducts({ params: { lang } }) {
   const [token, setToken] = useState("");

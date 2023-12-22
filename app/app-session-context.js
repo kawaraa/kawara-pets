@@ -40,7 +40,7 @@ export default function AppSessionContextProvider({ children, lang, theme, curre
     // const [code = "EUR", rate = 1] = Cookies.get("currency")?.split(":") || [];
     // setCurrency({ code, rate });
 
-    if (!Cookies.get("lang")) Cookies.set("lang", lang);
+    Cookies.set("lang", lang);
     // Todo: select the language base on the browser language:
     // console.log(window.navigator.language);
 

@@ -16,10 +16,8 @@ export default function RootLayout({ children }) {
   // Note: Using "cookies()" triggers the dynamic layout rendering, then access "childProp?.segment"
   const cookieStorage = cookies();
   const [code = "EUR", rate = 1] = cookieStorage.get("currency")?.value?.split(":") || [];
-  const lang =
-    (children?.props?.childProp?.segment || []).includes("ar") || cookieStorage.get("lang")?.value == "ar"
-      ? "ar"
-      : "en";
+  let lang = getSupportedLanguage((children?.props?.childProp?.segment || [])[1]);
+  if (!lang) lang = getSupportedLanguage(cookieStorage.get("lang")?.value) || "en";
   // const themeMode = cookieStorage.get("themeMode")?.value || "auto";
 
   return (
@@ -47,3 +45,5 @@ export const viewport = {
   ],
   colorScheme: "light dark",
 };
+
+export const getSupportedLanguage = (lang) => ["en", "ar"].find((l) => l === lang);
