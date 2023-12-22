@@ -4,7 +4,7 @@ const twitterSite = process.env.TWITTER_SITE;
 
 export default function getMetadata({ lang, title, description, keywords, author, data }) {
   return {
-    title: { default: title || content.title[lang], template: `%s | ${siteName}` },
+    title: title || { default: content.title[lang], template: `%s | ${siteName}` },
     description: description || content.description[lang],
     keywords: keywords || content.keywords[lang],
     category: "retail", // grocery
