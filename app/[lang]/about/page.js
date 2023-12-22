@@ -19,11 +19,11 @@ export default function About({ params: { lang } }) {
 
 export function generateMetadata({ params }) {
   const lang = params.lang;
-  return getMetadata({ lang, title: content.h1[lang] + " - Kawara Pets" });
+  return getMetadata({ lang, title: content.h1[lang] });
 }
 
 const content = {
-  title: { en: `About ${siteName}`, ar: `معلومات عن ${siteName}` },
+  title: { en: "About us", ar: "معلومات عنا" },
   h1: {
     en: `Welcome to ${siteName}, where we believe in enhancing the lives of your furry friends through quality products and exceptional service. As fellow pet lovers, we understand the joy and companionship these adorable creatures bring to our lives, and we're dedicated to providing you with everything you need to keep them happy, healthy, and tail-waggingly content`,
     ar: `مرحبًا بك في ${siteName}، حيث نؤمن بتعزيز حياة أصدقائك ذوي الفراء من خلال منتجات عالية الجودة وخدمة استثنائية. باعتبارنا محبين للحيوانات الأليفة، فإننا نتفهم السعادة والرفقة التي تجلبها هذه المخلوقات الرائعة لحياتنا، ونحن ملتزمون بتزويدك بكل ما تحتاجه لإبقائها سعيدة وصحية وممتعة.`,

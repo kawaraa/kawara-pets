@@ -6,7 +6,7 @@ import { Cookies } from "../../../service/utilities";
 import { linkCls } from "../../../components/layout/tailwindcss-class";
 import Modal from "../../../components/layout/modal";
 import { InputField } from "../../../components/layout/inputs";
-const siteName = process.env.SITE_NAME || "";
+const siteName = process.env.SITE_NAME || "Kawara Pets";
 
 export default function AddProducts({ params: { lang } }) {
   const [token, setToken] = useState("");
@@ -53,7 +53,7 @@ export default function AddProducts({ params: { lang } }) {
 }
 
 const content = {
-  h1: { en: "Admin login", ar: "دخول المشرف" },
+  h1: { en: "Admin Dashboard", ar: "لوحة تحكم المشرف" },
   btn: { en: "Clear secret key", ar: "مسح المفتاح السري" },
   modal: {
     title: { en: "Please enter your secret key", ar: "الرجاء إدخال المفتاح السري الخاص بك" },

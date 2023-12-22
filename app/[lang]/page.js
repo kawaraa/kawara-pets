@@ -4,8 +4,9 @@ import Carousel from "../../components/layout/carousel";
 import { ThreeItemGrid } from "../../components/grid/three-items";
 
 export default async function HomePageByLang({ params: { lang } }) {
-  const cookieStorage = cookies();
-  const [code = "EUR", rate = 1] = cookieStorage.get("currency")?.value?.split(":") || [];
+  if (lang != "en" && lang != "ar") return null;
+
+  const [code = "EUR", rate = 1] = cookies().get("currency")?.value?.split(":") || [];
   const props = { lang, currency: { code, rate } };
 
   return (
@@ -19,5 +20,5 @@ export default async function HomePageByLang({ params: { lang } }) {
 }
 
 export function generateMetadata({ params: { lang } }) {
-  return { alternates: { canonical: lang == "en" ? "/" : "/ar" } };
+  return lang != "en" ? null : { alternates: { canonical: "/" } };
 }

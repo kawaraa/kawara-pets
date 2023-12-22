@@ -52,14 +52,14 @@ export default function getMetadata({ lang, title, description, keywords, author
 }
 
 const content = {
-  title: { en: "Kawara Pets - Web Shop", ar: "متجر ويب - Kawara Pets" },
+  title: { en: "Kawara Pets", ar: "كوارا للحيوانات الأليفة" },
   description: {
     en: "Kawara Pets is an online pet store that serve a heigh quality products from different pet supply categories, order now and benefit the fast shipping.",
-    ar: "Kawara Pets هو متجر متجر الحيوانات الأليفة على الإنترنت يقدم منتجات عالية الجودة من فئات مختلفة لمستلزمات الحيوانات الأليفة، اطلب الآن واستفد من الشحن السريع",
+    ar: "Kawara Pets هو متجر الحيوانات الأليفة على الإنترنت يقدم منتجات عالية الجودة من فئات مختلفة لمستلزمات الحيوانات الأليفة، اطلب الآن واستفد من الشحن السريع",
   },
   keywords: {
-    en: "Kawara Shop, Pet store, Pet supplies, heigh quality pet products, all pet product categories",
-    ar: "Kawara Shop، متجر للحيوانات الأليفة, جميع فئات منتجات الحيوانات الأليفة, مستلزمات الحيوانات الأليفة, منتجات الحيوانات الأليفة عالية الجودة, متجر على الإنترنت",
+    en: "Kawara Pet store, Pet supplies, heigh quality pet products, all pet product categories",
+    ar: "متجر للحيوانات الأليفة, جميع فئات منتجات الحيوانات الأليفة, مستلزمات الحيوانات الأليفة, منتجات الحيوانات الأليفة عالية الجودة, متجر على الإنترنت",
   },
   author: { name: "Kawara Pets", url: baseUrl },
 };

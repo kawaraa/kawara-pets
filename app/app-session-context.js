@@ -6,8 +6,8 @@ import ImagePreview from "../components/layout/image-preview";
 
 export const AppSessionContext = createContext();
 
-export default function AppSessionContextProvider({ children, lang, theme }) {
-  const [currency, setCurrency] = useState({ code: "EUR", rate: 1 });
+export default function AppSessionContextProvider({ children, lang, theme, currency }) {
+  // const [currency, setCurrency] = useState({ code: "EUR", rate: 1 });
   const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState([]);
   const [themeMode, setThemeMode] = useState(theme);
@@ -37,9 +37,10 @@ export default function AppSessionContextProvider({ children, lang, theme }) {
     const aThemeMode = Cookies.get("themeMode") || window.localStorage.getItem("themeMode");
     updateThemeMode(aThemeMode || "auto");
     setCart(JSON.parse(window.localStorage.getItem("cart")) || []);
-    const [code = "EUR", rate = 1] = Cookies.get("currency")?.split(":") || [];
-    setCurrency({ code, rate });
+    // const [code = "EUR", rate = 1] = Cookies.get("currency")?.split(":") || [];
+    // setCurrency({ code, rate });
 
+    if (!Cookies.get("lang")) Cookies.set("lang", lang);
     // Todo: select the language base on the browser language:
     // console.log(window.navigator.language);
 
