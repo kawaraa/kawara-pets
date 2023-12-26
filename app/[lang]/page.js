@@ -12,6 +12,7 @@ export default async function HomePageByLang({ params: { lang } }) {
 
   return (
     <>
+      <h1 className="sr-only">{content.h1[lang]}</h1>
       <ThreeItemGrid {...props} />
       <Suspense>
         <Carousel {...props} />
@@ -23,3 +24,7 @@ export default async function HomePageByLang({ params: { lang } }) {
 export function generateMetadata({ params: { lang } }) {
   return lang != "en" ? null : { alternates: { canonical: "/" } };
 }
+
+const content = {
+  h1: { en: "Kawara Pets supplies", ar: "كوارا لمستلزمات الحيوانات الأليفة" },
+};
