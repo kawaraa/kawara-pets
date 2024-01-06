@@ -2,5 +2,6 @@
   { "en": "Home", "ar": "الصفحة الرئيسية", "path": "/lang" },
   { "en": "Products", "ar": "المنتجات", "path": "/lang/search" },
   { "en": "About", "ar": "لمحة", "path": "/lang/about" },
-  { "en": "Contact", "ar": "اتصل بنا", "path": "/lang/contact" }
+  { "en": "Contact", "ar": "اتصل بنا", "path": "/lang/contact" },
+  { "en": "Terms And Conditions", "ar": "الأحكام والشروط", "path": "/lang/terms" }
 ]

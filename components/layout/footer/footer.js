@@ -12,7 +12,7 @@ export default async function Footer({ lang }) {
 
   return (
     <footer className="text-sm mt-16">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 border-t border-neutral-200 px-6 py-12 text-sm dark:border-neutral-700 md:flex-row md:gap-12 md:px-4 min-[1320px]:px-0">
+      <div className="mx-auto flex w-full max-w-7xl flex-col  border-t border-neutral-200 px-6 py-12 text-sm dark:border-neutral-700 md:flex-row md:gap-12 md:px-4 min-[1320px]:px-0">
         <div>
           <Logo />
         </div>
@@ -29,6 +29,20 @@ export default async function Footer({ lang }) {
           }>
           <FooterMenu menu={menu} lang={lang} />
         </Suspense>
+        <div className="flex-auto"></div>
+        <div className="flex self-end justify-end gap-3">
+          {content.socialMedia.map((item, i) => (
+            <a
+              href={item.link}
+              target="_blank"
+              title={item.title[lang]}
+              className={`overflow-hidden w-8 aspect-square bg-bg p-1 rounded-lg duration-300`}
+              key={i}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={item.imageUrl} alt="social media profile logo" className="w-full h-full" />
+            </a>
+          ))}
+        </div>
       </div>
 
       <div className="border-t border-neutral-200 py-6 text-sm dark:border-neutral-700">
@@ -48,4 +62,21 @@ export default async function Footer({ lang }) {
 const content = {
   rights: { en: "All rights reserved", ar: "كل الحقوق محفوظة" },
   certified: { en: "Crafted by Kawara", ar: "Kawara من صنع" },
+  socialMedia: [
+    {
+      title: { en: "Kawara Pets Facebook page", ar: "صفحة كوارا للحيوانات الأليفة على الفيسبوك" },
+      link: "https://www.facebook.com/KawaraPets",
+      imageUrl: "/facebook.png",
+    },
+    {
+      title: { en: "Kawara Pets Instagram page", ar: "صفحة كوارا للحيوانات الأليفة على الانستغرام" },
+      link: "https://www.instagram.com/kawarapets",
+      imageUrl: "/instagram.png",
+    },
+    {
+      title: { en: "Kawara Pets Pinterest page", ar: "صفحة كوارا للحيوانات الأليفة على لينكدإن" },
+      link: "https://pinterest.com/KawaraPets",
+      imageUrl: "/pinterest.png",
+    },
+  ],
 };

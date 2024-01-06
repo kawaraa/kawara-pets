@@ -6,13 +6,11 @@ import { useEffect, useState } from "react";
 
 export default function FooterMenu({ menu, lang }) {
   return (
-    <nav>
-      <ul>
-        {menu.map((item, i) => (
-          <FooterMenuItem key={i} item={item} lang={lang} />
-        ))}
-      </ul>
-    </nav>
+    <ul>
+      {menu.map((item, i) => (
+        <FooterMenuItem key={i} item={item} lang={lang} />
+      ))}
+    </ul>
   );
 }
 
