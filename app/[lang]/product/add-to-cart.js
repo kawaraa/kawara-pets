@@ -57,10 +57,10 @@ export function AddToCart({ lang, product }) {
   const getUserGeo = async (shippable = false) => {
     const url = `/api/geo?timezone=${Intl.DateTimeFormat().resolvedOptions().timeZone}`;
     const { country, name, city } = await request(url);
-
     const countryCodes = Object.keys(product.meta.shippableTo || {});
+
     if (countryCodes.includes(country)) shippable = true;
-    else if (countryCodes.includes("EU") && typeof euCountries[country] == "string") shippable = true;
+    else if (countryCodes.includes("EU") && typeof euCountries[country]) shippable = true;
     setRegion(name && city ? `${name}, ${city}` : content.shippable[lang][1]);
     if (!shippable) setShippable(shippable);
   };

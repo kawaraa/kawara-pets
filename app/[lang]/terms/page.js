@@ -2,7 +2,7 @@ import getMetadata from "../../metadata";
 import Article from "../../../components/article";
 const siteName = process.env.SITE_NAME || "";
 
-export default function About({ params: { lang } }) {
+export default function Terms({ params: { lang } }) {
   return (
     <section dir="auto" className="max-w-4xl mx-auto mb-20 pt-10 px-2">
       <p className="my-10 text-center text-3xl font-semibold">{content.title[lang]}</p>
