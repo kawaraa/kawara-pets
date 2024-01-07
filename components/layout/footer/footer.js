@@ -29,6 +29,7 @@ export default async function Footer({ lang }) {
           }>
           <FooterMenu menu={menu} lang={lang} />
         </Suspense>
+
         <div className="flex-auto"></div>
         <div className="flex self-end justify-end gap-3">
           {content.socialMedia.map((item, i) => (
@@ -74,7 +75,7 @@ const content = {
       imageUrl: "/instagram.png",
     },
     {
-      title: { en: "Kawara Pets Pinterest page", ar: "صفحة كوارا للحيوانات الأليفة على لينكدإن" },
+      title: { en: "Kawara Pets Pinterest page", ar: "صفحة كوارا للحيوانات الأليفة على بينتريست" },
       link: "https://pinterest.com/KawaraPets",
       imageUrl: "/pinterest.png",
     },
