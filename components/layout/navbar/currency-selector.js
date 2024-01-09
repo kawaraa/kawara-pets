@@ -27,11 +27,13 @@ export default function CurrencySelector({ lang }) {
         onChange={handleCurrencyChange}
         id="country"
         className={`${cardBgCls} ${bCls} ${bHrFsCls} rounded-lg w-full text-center py-2 dark:text-white`}>
-        {Object.keys(currencies).map((k, i) => (
-          <option value={k} key={i}>
-            {currencies[k]} {k}
-          </option>
-        ))}
+        {Object.keys(currencies)
+          .slice(0, 4)
+          .map((k, i) => (
+            <option value={k} key={i}>
+              {currencies[k]} {k}
+            </option>
+          ))}
       </select>
     </label>
   );

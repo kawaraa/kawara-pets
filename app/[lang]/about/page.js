@@ -1,10 +1,10 @@
 import getMetadata from "../../metadata";
-import Article from "../../../components/article";
+import { Article } from "../../../components/article";
 const siteName = process.env.SITE_NAME || "";
 
 export default function About({ params: { lang } }) {
   return (
-    <section dir="auto" className="max-w-4xl mx-auto mb-20 pt-10 px-2">
+    <article dir="auto" className="max-w-4xl mx-auto mb-20 pt-10 px-2">
       <p className="my-10 text-center text-3xl font-semibold">{content.title[lang]}</p>
 
       <h1 className="text-lg font-bold mt-8 mb-3">{content.h1[lang]}</h1>
@@ -13,7 +13,7 @@ export default function About({ params: { lang } }) {
       {content.articles.map((a, i) => (
         <Article lang={lang} article={a} key={i} />
       ))}
-    </section>
+    </article>
   );
 }
 

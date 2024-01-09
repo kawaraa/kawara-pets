@@ -11,7 +11,7 @@ export default function SearchLayout({ children, params }) {
         <div className="order-first w-full flex-none md:max-w-[125px]">
           <Collections lang={lang} content={content.collections} />
         </div>
-        <div className="order-last min-h-screen w-full md:order-none">{children}</div>
+        <article className="order-last min-h-screen w-full md:order-none">{children}</article>
         {/* <div className="order-none flex-none md:order-last md:w-[125px]">
           <FilterList lang={lang} content={content.sorting} />
         </div> */}

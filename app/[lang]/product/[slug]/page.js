@@ -51,7 +51,7 @@ export default async function ProductPage({ params: { lang, slug }, searchParams
       />
 
       <div className="mx-auto max-w-screen-2xl px-4">
-        <div className="rounded-lg border border-neutral-200 bg-white p-8 dark:border-neutral-800 dark:bg-black md:p-12">
+        <article className="rounded-lg border border-neutral-200 bg-white p-8 dark:border-neutral-800 dark:bg-black md:p-12">
           <div className="flex flex-col lg:flex-row lg:gap-8">
             <Gallery lang={lang} media={product.meta.media.map((m) => ({ src: m, alt: product.name }))} />
             <div>
@@ -91,7 +91,7 @@ export default async function ProductPage({ params: { lang, slug }, searchParams
               </table>
             </div>
           )}
-        </div>
+        </article>
 
         <Suspense>
           <RelatedProducts {...props} category={product.category} />
@@ -142,7 +142,7 @@ async function RelatedProducts({ lang, currency, category }) {
   });
 
   return (
-    <div className="py-8">
+    <article className="py-8">
       <h2 className="mb-4 text-2xl font-bold">{content.relatedProducts[lang]}</h2>
       <ul className="flex w-full gap-4 overflow-x-auto pt-1">
         {relatedProducts.map((product, i) => (
@@ -169,7 +169,7 @@ async function RelatedProducts({ lang, currency, category }) {
           </li>
         ))}
       </ul>
-    </div>
+    </article>
   );
 }
 
