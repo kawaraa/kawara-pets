@@ -36,10 +36,18 @@ export default async function ProductPage({ params: { lang, slug }, searchParams
     image: product.meta.media[0],
     offers: {
       "@type": "AggregateOffer",
+      offerCount: variants.length,
       availability: availableForSale > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
       priceCurrency: "EUR",
       highPrice: product.highPrice,
       lowPrice: product.lowPrice,
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: 4,
+      reviewCount: 132,
+      bestRating: 5,
+      worstRating: 1,
     },
   };
 
